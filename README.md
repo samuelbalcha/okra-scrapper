@@ -1,6 +1,6 @@
-# TS-Backend-Starter
+# Okra scraper
 
-This is a boiler plate project that has a basic setup to get started with typescript backend development.
+This is a data scraper for Okra.
 
 # Technical stack
 
@@ -8,6 +8,9 @@ This is a boiler plate project that has a basic setup to get started with typesc
 
 TypeScript is used to ensure the codebase is typesafe where possible.
 
+## Puppeteer
+
+A headless API to interact with Chromium
 ## Jest
 
 Jest is used to run the tests found in the src directory that end with `.test.ts`.

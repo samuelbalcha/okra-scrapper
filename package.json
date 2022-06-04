@@ -1,5 +1,5 @@
 {
-  "name": "ts-backend-starter",
+  "name": "okra-scraper",
   "version": "1.0.0",
   "description": "",
   "author": "Samuel B. Hailemariam",
@@ -13,11 +13,13 @@
     "audit": "npm audit --audit-level=high"
   },
   "dependencies": {
-    "@types/node": "^17.0.23"
+    "@types/node": "^17.0.23",
+    "puppeteer": "^14.2.1"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@types/prettier": "^2.6.0",
+    "@types/puppeteer": "^5.4.6",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
     "dotenv": "^16.0.0",
