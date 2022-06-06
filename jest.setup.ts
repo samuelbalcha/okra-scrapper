@@ -1,5 +1,1 @@
-import * as dotenv from 'dotenv';
-
-dotenv.config({
-	path: './.env.jest',
-});
+import 'expect-puppeteer';

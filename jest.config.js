@@ -1,7 +1,8 @@
 module.exports = {
-	preset: 'ts-jest',
+	preset: 'jest-puppeteer',
 	testEnvironment: 'node',
 	setupFiles: ['./jest.setup.ts'],
+	globalSetup: './jest.global-setup.ts',
 	collectCoverageFrom: ['src/**/*.ts', '!**/node_modules/**'],
 	coverageThreshold: {
 		'src/**/*.ts': {
@@ -11,5 +12,10 @@ module.exports = {
 			lines: 30,
 		},
 	},
-	modulePathIgnorePatterns: ['dist/'],
+	testPathIgnorePatterns: ['/node_modules/', 'dist'], 
+	setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+	transform: {
+		"^.+\\.ts?$": "ts-jest"
+	},
+	modulePathIgnorePatterns: ['dist/']
 };
