@@ -51,4 +51,7 @@ typings/
 dist
 out
 
+# data
+src/data.ts
+
 
