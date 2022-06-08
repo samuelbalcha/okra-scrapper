@@ -1,55 +1,40 @@
 import { ScraperService } from './ScraperService';
+import { FormatterService } from './FormatterService';
+
+jest.setTimeout(20000);
 
 describe('ScraperService', () => {
-	const scrapeService = new ScraperService('https://bankof.okra.ng/');
+	describe('scrape', () => {
+		it('should throw error when unable to scrape page', async () => {
+			const scrapeService = new ScraperService('https://google.com');
 
-	describe('initialize', () => {
-		it('should initialize browser and return current location', async () => {
-			const url = await scrapeService.initialize();
-			expect(url).toEqual('https://bankof.okra.ng/');
-			await scrapeService.close();
-		});
-	});
-
-	describe('register', () => {
-		let existingEmail = '';
-
-		beforeEach(async () => {
-			await scrapeService.initialize();
-		});
-
-		it('should return success when new user data is provided', async () => {
-			const email = `sam-${Date.now()}@gmail.com`;
-			existingEmail = email;
-
-			const { success, data } = await scrapeService.register(
-				{
+			expect(async () => {
+				await scrapeService.scrape({
 					firstName: 'sam',
 					lastName: 'bal',
-					email,
+					email: 'abc@gmail.com',
 					password: '234-admin',
-				},
-				'[href="/register"]'
+				});
+			}).rejects.toThrowError(
+				'Could not scrape: https://google.com Error: Error: failed to find element matching selector "[href="/register"]"'
 			);
-
-			expect(success).toEqual(true);
-			expect(data).toHaveProperty('data.user');
-			await scrapeService.close();
 		});
 
-		it('should return status "400" when existing user data is provided', async () => {
-			const authData = {
+		it('should call formatterService.format when data is available', async () => {
+			const scrapeService = new ScraperService('https://bankof.okra.ng/');
+			const formatterService = new FormatterService();
+
+			const formatterServiceSpy = jest.spyOn(formatterService, 'format');
+			const email = `sam-${Date.now()}@gmail.com`;
+
+			await scrapeService.scrape({
 				firstName: 'sam',
 				lastName: 'bal',
-				email: existingEmail,
+				email,
 				password: '234-admin',
-			};
+			});
 
-			expect(
-				async () =>
-					await scrapeService.register(authData, '[href="/register"]')
-			).rejects.toThrowError();
-			await scrapeService.close();
+			expect(formatterServiceSpy).toHaveBeenCalled();
 		});
 	});
 });
