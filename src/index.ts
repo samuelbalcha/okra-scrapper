@@ -15,6 +15,10 @@ app.use(bodyParser());
 
 const scraper = new ScraperService(process.env.SCRAPE_URL as string);
 
+app.get('*', (_req, res) => {
+	res.send({ message: 'Welcome to Okra scraper' });
+});
+
 app.post('/scrape', async (req, res) => {
 	const authData = {
 		email: req.body.email,
