@@ -27,6 +27,7 @@ app.post('/scrape', async (req, res) => {
 		lastName: req.body.lastName,
 	};
 
+	await scraper.initialize();
 	await scraper.scrape(authData);
 	res.status(200).send({ message: 'Success' });
 });

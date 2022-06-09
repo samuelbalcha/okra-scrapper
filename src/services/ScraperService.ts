@@ -15,19 +15,20 @@ export class ScraperService {
 		this.formatterService = new FormatterService();
 	}
 
+	async initialize() {
+		this.browser = await puppeteer.launch({
+			headless: true,
+			args: [
+				'--no-sandbox',
+				'--disable-setuid-sandbox',
+				'--disable-web-security',
+				'--disable-features=IsolateOrigins',
+			],
+		});
+	}
+
 	async scrape(authData: IAuthData) {
 		try {
-			this.browser = await puppeteer.launch({
-				headless: true,
-				args: [
-					'--no-sandbox',
-					'--disable-setuid-sandbox',
-					'--disable-web-security',
-					'--disable-features=IsolateOrigins',
-					'--disable-site-isolation-trials',
-				],
-			});
-
 			this.page = await this.browser.newPage();
 			await this.page.goto(this.url, { waitUntil: 'load' });
 			await this.page.$eval('[href="/register"]', (el: any) =>
