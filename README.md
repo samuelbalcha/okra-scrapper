@@ -11,13 +11,10 @@ TypeScript is used to ensure the codebase is typesafe where possible.
 ## Puppeteer
 
 A headless API to interact with Chromium
+
 ## Jest
 
 Jest is used to run the tests found in the src directory that end with `.test.ts`.
-
-```bash
-npm run start
-```
 
 ### Deployment
 

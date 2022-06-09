@@ -1,10 +1,32 @@
-//import { ScraperService } from './services/ScraperService';
+import express from 'express';
+import { json as bodyParser, urlencoded } from 'body-parser';
 
-const start = async () => {
-	//	const scrapeService = new ScraperService('');
-	// Initialize
-	//await scrapeService.scrape();
-	// Register
-};
+import { ScraperService } from './services/ScraperService';
 
-start();
+const app = express();
+const port = process.env.PORT || 5000;
+
+app.use(
+	urlencoded({
+		extended: true,
+	})
+);
+app.use(bodyParser());
+
+const scraper = new ScraperService(process.env.SCRAPE_URL as string);
+
+app.post('/scrape', async (req, res) => {
+	const authData = {
+		email: req.body.email,
+		password: req.body.password,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+	};
+
+	await scraper.scrape(authData);
+	res.status(200).send({ message: 'Success' });
+});
+
+app.listen(port, () => {
+	console.log(`Okra scraper connected at port ${port}`);
+});
