@@ -7,6 +7,7 @@ describe('ScraperService', () => {
 	describe('scrape', () => {
 		it('should throw error when unable to scrape page', async () => {
 			const scrapeService = new ScraperService('https://google.com');
+			await scrapeService.initialize();
 
 			expect(async () => {
 				await scrapeService.scrape({
@@ -22,6 +23,8 @@ describe('ScraperService', () => {
 
 		it('should call formatterService.format when data is available', async () => {
 			const scrapeService = new ScraperService('https://bankof.okra.ng/');
+			await scrapeService.initialize();
+
 			const formatterService = new FormatterService();
 
 			const formatterServiceSpy = jest.spyOn(formatterService, 'format');
