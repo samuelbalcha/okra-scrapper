@@ -79,6 +79,7 @@ export class ScraperService {
 			await this.page.close();
 			await this.browser.close();
 		} catch (e) {
+			await this.browser.close();
 			console.error(`Could not scrape: ${this.url}`, e);
 		}
 	}

@@ -2,14 +2,16 @@ import { Schema, model } from 'mongoose';
 import { TransactionType } from '../enums/TransactionType';
 
 export const TransactionSchema = new Schema({
+	accountNumber: {
+		type: String,
+		required: true,
+	},
 	sender: {
-		type: Schema.Types.ObjectId,
-		ref: 'Account',
+		type: String,
 		required: true,
 	},
 	beneficiary: {
-		type: Schema.Types.ObjectId,
-		ref: 'Account',
+		type: String,
 		required: true,
 	},
 	transactionType: {
@@ -49,6 +51,7 @@ export const TransactionSchema = new Schema({
 	},
 });
 
+TransactionSchema.index({ accountNumber: 1, createdAt: -1 });
 TransactionSchema.index({ sender: 1, beneficiary: 1, createdAt: -1 });
 
 export const Transaction = model('Transaction', TransactionSchema);

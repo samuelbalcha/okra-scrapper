@@ -5,17 +5,17 @@ export const AuthSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Customer',
 	},
-	loginAt: {
-		type: Date,
-		required: true,
-		default: Date.now,
+	OTP: {
+		type: Number,
 	},
-	logoutAt: {
+	userId: {
+		type: String,
+	},
+	createdAt: {
 		type: Date,
-		default: Date.now,
 	},
 });
 
-AuthSchema.index({ customerId: 1, loginAt: -1 });
+AuthSchema.index({ customerId: 1 });
 
 export const AuthData = model('AuthData', AuthSchema);
