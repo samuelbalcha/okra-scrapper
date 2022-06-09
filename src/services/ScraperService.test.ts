@@ -28,8 +28,8 @@ describe('ScraperService', () => {
 			const email = `sam-${Date.now()}@gmail.com`;
 
 			await scrapeService.scrape({
-				firstName: 'sam',
-				lastName: 'bal',
+				firstName: 'Samuel',
+				lastName: 'Balcha',
 				email,
 				password: '234-admin',
 			});

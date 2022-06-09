@@ -51,12 +51,9 @@ export const AccountSchema = new Schema({
 		required: true,
 		default: Date.now,
 	},
-	suspendedAt: {
-		type: Date,
-		default: Date.now,
-	},
 });
 
 AccountSchema.index({ customerId: 1, accountNumber: 1, createdAt: -1 });
+AccountSchema.index({ accountNumber: 1 });
 
 export const Account = model('Account', AccountSchema);
