@@ -20,6 +20,8 @@ export class ScraperService {
 			this.browser = await puppeteer.launch({
 				headless: true,
 				args: [
+					'--no-sandbox',
+					'--disable-setuid-sandbox',
 					'--disable-web-security',
 					'--disable-features=IsolateOrigins',
 					'--disable-site-isolation-trials',
